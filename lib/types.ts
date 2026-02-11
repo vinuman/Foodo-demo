@@ -1,8 +1,3 @@
-/* ------------------------------------------------------------------ */
-/*  TheMealDB API types                                               */
-/* ------------------------------------------------------------------ */
-
-/** Raw meal object returned by TheMealDB. */
 export interface MealDBMeal {
   idMeal: string;
   strMeal: string;
@@ -17,7 +12,6 @@ export interface MealDBMeal {
   [key: `strMeasure${number}`]: string | null;
 }
 
-/** Normalised meal used across the app. */
 export interface Meal {
   id: string;
   name: string;
@@ -36,10 +30,6 @@ export interface Ingredient {
   measure: string;
 }
 
-/* ------------------------------------------------------------------ */
-/*  Foodo 3D Model API types                                          */
-/* ------------------------------------------------------------------ */
-
 export interface FoodoModelPath {
   glb: string;
   usdz: string | null;
@@ -55,7 +45,6 @@ export interface FoodoLightingInfo {
   verticalPosition: number;
 }
 
-/** Single 3D model from the Foodo API. */
 export interface FoodoModel {
   _id: string;
   name: string;
@@ -64,7 +53,6 @@ export interface FoodoModel {
   lightingInfo: FoodoLightingInfo;
 }
 
-/** Foodo API response wrapper. */
 export interface FoodoApiResponse {
   success: boolean;
   code: number;

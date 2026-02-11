@@ -4,13 +4,7 @@ import { MealGrid } from "@/components/meals/meal-grid";
 import { SearchInput } from "@/components/ui/search-input";
 import { searchMeals } from "@/lib/mealdb";
 
-/**
- * Search page — Server-Side Rendering (SSR).
- *
- * `dynamic = "force-dynamic"` ensures this page is never statically cached.
- * Every request reads the current `searchParams` and fetches fresh results
- * with `cache: "no-store"`.
- */
+// Search page — SSR. Every request fetches fresh results (force-dynamic + no-store).
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
@@ -28,24 +22,25 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
 
   return (
     <>
-      <section className="pb-8 pt-4">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+      <section className="pb-10 pt-16 text-center">
+        <h1 className="font-serif text-5xl font-bold italic tracking-tight sm:text-6xl">
           Search
         </h1>
-        <p className="mt-3 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-          Find any meal by name. Results are fetched fresh on every search.
+        <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-neutral-400">
+          Find any meal by name. Results are fetched fresh from our global
+          culinary database on every search.
         </p>
       </section>
 
-      <div className="mb-8">
+      <div className="mx-auto mb-10 max-w-2xl">
         <SearchInput />
       </div>
 
       {query ? (
         <MealGrid meals={meals} />
       ) : (
-        <p className="py-12 text-center text-neutral-500 dark:text-neutral-400">
-          Start typing to search for meals.
+        <p className="py-12 text-center text-neutral-500">
+          Start typing to explore recipes
         </p>
       )}
     </>

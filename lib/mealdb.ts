@@ -1,14 +1,6 @@
 import { MEALDB_BASE_URL } from "./constants";
 import type { Ingredient, Meal, MealDBMeal } from "./types";
 
-/* ------------------------------------------------------------------ */
-/*  Normalisation helpers                                             */
-/* ------------------------------------------------------------------ */
-
-/**
- * Extract the ingredient/measure pairs from the raw MealDB object.
- * The API stores them as strIngredient1…20 / strMeasure1…20.
- */
 function extractIngredients(raw: MealDBMeal): Ingredient[] {
   const ingredients: Ingredient[] = [];
 
@@ -24,7 +16,6 @@ function extractIngredients(raw: MealDBMeal): Ingredient[] {
   return ingredients;
 }
 
-/** Map a raw MealDB object to our normalised Meal interface. */
 function normaliseMeal(raw: MealDBMeal): Meal {
   return {
     id: raw.idMeal,
@@ -40,14 +31,7 @@ function normaliseMeal(raw: MealDBMeal): Meal {
   };
 }
 
-/* ------------------------------------------------------------------ */
-/*  Public API functions                                              */
-/* ------------------------------------------------------------------ */
-
-/**
- * Fetch meals starting with a given letter.
- * Used on the home page (SSG) — relies on Next.js default fetch caching.
- */
+// SSG — relies on Next.js default fetch caching (no revalidate, no cache: "no-store").
 export async function getMealsByLetter(letter: string): Promise<Meal[]> {
   const res = await fetch(`${MEALDB_BASE_URL}/search.php?f=${letter}`);
 
@@ -60,10 +44,7 @@ export async function getMealsByLetter(letter: string): Promise<Meal[]> {
   return (data.meals ?? []).map(normaliseMeal);
 }
 
-/**
- * Fetch a single meal by its ID.
- * Used on the detail page (ISR) — caller passes `next: { revalidate }`.
- */
+// ISR — caller passes `next: { revalidate }`.
 export async function getMealById(
   id: string,
   fetchOptions?: NextFetchRequestConfig,
@@ -82,10 +63,7 @@ export async function getMealById(
   return raw ? normaliseMeal(raw) : null;
 }
 
-/**
- * Search meals by name.
- * Used on the search page (SSR) — caller passes `cache: "no-store"`.
- */
+// SSR — caller passes `cache: "no-store"`.
 export async function searchMeals(
   query: string,
   fetchOptions?: RequestInit,

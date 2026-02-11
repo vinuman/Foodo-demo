@@ -2,13 +2,17 @@
 
 import { useRouter } from "next/navigation";
 
-export function BackButton() {
+interface BackButtonProps {
+  label?: string;
+}
+
+export function BackButton({ label = "Back" }: BackButtonProps) {
   const router = useRouter();
 
   return (
     <button
       onClick={() => router.back()}
-      className="cursor-pointer inline-flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-neutral-600 transition-colors hover:bg-neutral-100 hover:text-neutral-900 dark:text-neutral-400 dark:hover:bg-neutral-800 dark:hover:text-white"
+      className="inline-flex cursor-pointer items-center gap-1.5 text-sm font-medium text-neutral-300 transition-colors hover:text-white"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +29,7 @@ export function BackButton() {
         <path d="M19 12H5" />
         <path d="m12 19-7-7 7-7" />
       </svg>
-      Back
+      {label}
     </button>
   );
 }

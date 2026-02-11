@@ -6,32 +6,25 @@ interface IngredientListProps {
 
 export function IngredientList({ ingredients }: IngredientListProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-neutral-200 dark:border-neutral-800">
-      <table className="w-full text-left text-sm">
+    <div className="overflow-hidden rounded-2xl border border-neutral-800 bg-neutral-900/50">
+      <table className="w-full text-sm">
         <thead>
-          <tr className="border-b border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
-            <th className="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">
-              Ingredient
+          <tr className="border-b border-neutral-800">
+            <th className="px-5 py-3 text-left text-xs font-semibold uppercase tracking-wider text-neutral-400">
+              Item
             </th>
-            <th className="px-4 py-3 font-semibold text-neutral-700 dark:text-neutral-300">
-              Measure
+            <th className="px-5 py-3 text-right text-xs font-semibold uppercase tracking-wider text-neutral-400">
+              Qty
             </th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="divide-y divide-neutral-800/60">
           {ingredients.map((item, i) => (
-            <tr
-              key={item.name}
-              className={
-                i % 2 === 0
-                  ? "bg-white dark:bg-neutral-950"
-                  : "bg-neutral-50 dark:bg-neutral-900"
-              }
-            >
-              <td className="px-4 py-2.5 text-neutral-900 dark:text-neutral-100">
+            <tr key={i} className="transition-colors hover:bg-neutral-800/30">
+              <td className="px-5 py-3 text-neutral-100">
                 {item.name}
               </td>
-              <td className="px-4 py-2.5 text-neutral-600 dark:text-neutral-400">
+              <td className="px-5 py-3 text-right text-neutral-400">
                 {item.measure}
               </td>
             </tr>

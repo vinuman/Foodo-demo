@@ -1,13 +1,7 @@
 import { MealGrid } from "@/components/meals/meal-grid";
 import { getMealsByLetter } from "@/lib/mealdb";
 
-/**
- * Home page — Static Site Generation (SSG).
- *
- * Fetches meals at build time using the default cached `fetch`.
- * No `revalidate` or `cache: "no-store"` — the page is fully static,
- * generated once and served from the CDN on every request.
- */
+// Home page — SSG. Fetches meals at build time using the default cached fetch.
 
 const FEATURED_LETTERS = ["b", "c", "s"] as const;
 
@@ -20,18 +14,19 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="pb-8 pt-4">
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          Discover Meals
+      <section className="pb-10 pt-6">
+        <h1 className="font-serif text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
+          Discover{" "}
+          <em className="text-accent">Exceptional</em>{" "}
+          Meals
         </h1>
-        <p className="mt-3 max-w-2xl text-lg text-neutral-600 dark:text-neutral-400">
-          Browse a curated collection of recipes from around the world.
-          Click any meal to see the full recipe with ingredients and
-          instructions.
+        <p className="mt-4 max-w-xl text-lg leading-relaxed text-neutral-400">
+          A curated sanctuary for global culinary artistry. Immerse yourself in
+          refined recipes, premium ingredients, and a world of flavor.
         </p>
       </section>
 
-      <MealGrid meals={meals} />
+      <MealGrid meals={meals} variant="bento" />
     </>
   );
 }

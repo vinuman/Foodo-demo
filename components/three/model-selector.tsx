@@ -28,8 +28,8 @@ export function ModelSelector({
           onClick={() => onSelect(i)}
           className={`shrink-0 cursor-pointer rounded-full px-4 py-2 text-sm font-medium transition-colors ${
             i === selectedIndex
-              ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
-              : "bg-neutral-100 text-neutral-600 hover:bg-neutral-200 dark:bg-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700"
+              ? "bg-white text-neutral-900"
+              : "bg-neutral-800 text-neutral-400 hover:bg-neutral-700 hover:text-neutral-200"
           }`}
         >
           {formatName(model.name)}

@@ -1,25 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { BackButton } from "@/components/ui/back-button";
 import { MealDetail } from "@/components/meals/meal-detail";
 import { getMealById, getMealsByLetter } from "@/lib/mealdb";
 
-/**
- * Meal detail page — Incremental Static Regeneration (ISR).
- *
- * Each meal page is statically generated on first request, then
- * revalidated in the background every 60 seconds. `generateStaticParams`
- * pre-renders a subset of meals at build time for instant load.
- */
+// Meal detail page — ISR. Statically generated, revalidated every 60s.
 
 interface MealPageProps {
   params: Promise<{ id: string }>;
 }
 
 export async function generateStaticParams() {
-  // Pre-render meals starting with "b" at build time.
-  // Other meals are generated on-demand on first request.
   const meals = await getMealsByLetter("b");
 
   return meals.map((meal) => ({ id: meal.id }));
@@ -49,12 +40,5 @@ export default async function MealPage({ params }: MealPageProps) {
     notFound();
   }
 
-  return (
-    <>
-      <div className="mb-6">
-        <BackButton />
-      </div>
-      <MealDetail meal={meal} />
-    </>
-  );
+  return <MealDetail meal={meal} />;
 }
