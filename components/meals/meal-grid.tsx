@@ -29,6 +29,7 @@ export function MealGrid({ meals, variant = "uniform" }: MealGridProps) {
             key={meal.id}
             meal={meal}
             featured={isFeatured(i)}
+            priority={i < 4}
           />
         ))}
       </div>

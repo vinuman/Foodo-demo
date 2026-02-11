@@ -7,9 +7,10 @@ import type { Meal } from "@/lib/types";
 interface MealCardProps {
   meal: Meal;
   featured?: boolean;
+  priority?: boolean;
 }
 
-export function MealCard({ meal, featured = false }: MealCardProps) {
+export function MealCard({ meal, featured = false, priority = false }: MealCardProps) {
   return (
     <Link
       href={`/meals/${meal.id}`}
@@ -23,6 +24,7 @@ export function MealCard({ meal, featured = false }: MealCardProps) {
           alt={meal.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          priority={priority}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
